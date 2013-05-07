@@ -248,8 +248,8 @@
         <?php if ($this->dir != "base"): ?>
             <div id="breadcrumb" class="clearfix">
                 <ul>
-                    <li><a href="<?php echo $this->baseUrl . "&dir=base"; ?>"><i class="icon-folder-open"></i>&nbsp;Hauptverzeichnis LayoutFiles/</a></li>
-                    <li><a href="<?php echo $this->baseUrl . "&dir=" . $this->dir; ?>"><i class="icon-folder-open"></i>&nbsp;<?php echo $this->dir; ?>/</a></li>
+                    <li><a href="<?php echo $this->baseUrl . "&dir=base"; ?>"><img src="<?php echo $this->iconUrlFolder; ?>">&nbsp;Hauptverzeichnis LayoutFiles/</a></li>
+                    <li><a href="<?php echo $this->baseUrl . "&dir=" . $this->dir; ?>"><img src="<?php echo $this->iconUrlFolder; ?>">&nbsp;<?php echo $this->dir; ?>/</a></li>
                 </ul>
             </div>
             <div class="clearfix">
@@ -258,7 +258,7 @@
                         <input type="hidden" name="dir" value="<?php echo $this->dir; ?>">
                         <div class="clearfix">
                             <div id="topRemove">
-                                <a class="tablelink" href="#" onclick="if(confirm('Ausgew&auml;hlte Elemente l&ouml;schen ?')) {$('form#deleteFilesFrom').submit();};" ><i class="icon-remove"></i></a>
+                                <a class="tablelink" href="#" onclick="if(confirm('Ausgew&auml;hlte Elemente l&ouml;schen ?')) {$('form#deleteFilesFrom').submit();};" ><img src="<?php echo $this->iconUrlRemove; ?>"></a>
                             </div>
                         </div>
                         <table class="table table-hover table-bordered" style="margin-bottom:0;border-bottom-right-radius: 0;border-top-right-radius: 0;">
@@ -278,14 +278,14 @@
                                     <tr>
                                         <?php if ($info["type"] == "picture"): ?>
                                             <td id="href_thumbnail_<?php echo $i; ?>" class="imgage">
-                                                <a  class="tablelink" href="#"><i class="icon-picture"></i>&nbsp;<?php echo $name; ?></a>
+                                                <a  class="tablelink" href="#"><img src="<?php echo $this->iconUrlImage; ?>">&nbsp;<?php echo $name; ?></a>
                                                 <div  class="thumbnail" id="thumbnail_<?php echo $i; ?>">
                                                     <img border="0" src="<?php echo str_replace($name, "thumbnail_".$name, $info["url"]); ?>">
                                                 </div>
                                                 <div id="edge_nr_<?php echo $i; ?>" class="edge">&nbsp;</div>
                                             </td>
                                         <?php else: ?>
-                                            <td><a class="tableLink" href="#"><i class="icon-file"></i>&nbsp;<?php echo $name; ?></a></td>
+                                            <td><a class="tableLink" href="#"><img src="<?php echo $this->iconUrlFile; ?>">&nbsp;<?php echo $name; ?></a></td>
                                         <?php endif; ?>
 
                                         <td><?php echo $info["date"]; ?></td>
@@ -297,7 +297,7 @@
                                                 newName = newName.replace(/[^A-Za-z0-9_-]/g, '');  
                                                 self.location.href = '<?php echo $this->baseUrl . "&dir=".$this->dir."&cmd=renameFile&from=" . urlencode($name) ."&to=" ?>' + newName + '<?php $explodedName = explode(".", $name); echo ".".$explodedName[1]; ?>';
                                             }
-                                        };" ><i class="icon-pencil"></i>&nbsp;</a></td>
+                                        };" ><img src="<?php echo $this->iconUrlEdit; ?>">&nbsp;</a></td>
 
                                         <td><input class="cb_delete" type="checkbox" name="delete[<?php echo $name; ?>]" value="1" ></td>
 
@@ -307,7 +307,7 @@
                             </tbody>
                         </table>
                         <div id="bottomRemove">
-                            <a class="tablelink" href="#" onclick="if(confirm('Ausgew&auml;hlte Elemente l&ouml;schen ?')) {$('form#deleteFilesFrom').submit();};" ><i class="icon-remove"></i></a>
+                            <a class="tablelink" href="#" onclick="if(confirm('Ausgew&auml;hlte Elemente l&ouml;schen ?')) {$('form#deleteFilesFrom').submit();};" ><img src="<?php echo $this->iconUrlRemove; ?>"></a>
                         </div>
                     </form>
                 <?php else: ?>
@@ -317,7 +317,7 @@
             <?php else: ?>
                 <div id="breadcrumb" class="clearfix" style="margin-bottom: 36px;">
                     <ul>
-                        <li><a href="<?php echo $this->baseUrl . "&dir=base"; ?>"><i class="icon-folder-open"></i>&nbsp;Hauptverzeichnis LayoutFiles/</a></li>
+                        <li><a href="<?php echo $this->baseUrl . "&dir=base"; ?>"><img src="<?php echo $this->iconUrlFolder; ?>">&nbsp;Hauptverzeichnis LayoutFiles/</a></li>
                     </ul>
                 </div>
                 <?php if (!empty($this->dirContent)): ?>
@@ -334,7 +334,7 @@
                         <tbody>
                     <?php foreach ($this->dirContent as $name => $info): ?>
                             <tr>
-                                <td><a class="tableLink" href="<?php echo $this->baseUrl . "&dir=" . $name; ?>"><i class="icon-folder-close"></i>&nbsp;<?php echo $name; ?></a></td>
+                                <td><a class="tableLink" href="<?php echo $this->baseUrl . "&dir=" . $name; ?>"><img src="<?php echo $this->iconUrlFolderClose; ?>">&nbsp;<?php echo $name; ?></a></td>
                                 <td><?php echo $info["fileCount"]; ?></td>
                                 <td><?php echo $info["completeFileSize"]; ?></td>
                                 
@@ -344,10 +344,10 @@
                                         newName = newName.replace(/[^A-Za-z0-9_-]/g, '');  
                                         self.location.href = '<?php echo $this->baseUrl . "&cmd=renameDir&from=" . urlencode($name) ."&to=" ?>' + newName;
                                     }
-                                };" ><i class="icon-pencil"></i>&nbsp;</a></td>
+                                };" ><img src="<?php echo $this->iconUrlEdit; ?>">&nbsp;</a></td>
                                 
                                 <?php if ($info["fileCount"] == 0): ?>
-                                    <td><a class="tableLink iconpadding" href="<?php echo $this->baseUrl . "&cmd=deleteDir&dir=" . $name; ?>" onclick="return confirm('Das Verzeichnis \' <?php echo $name; ?> \' wirklich l&ouml;schen ?');"><i class="icon-remove"></i></a></td>
+                                    <td><a class="tableLink iconpadding" href="<?php echo $this->baseUrl . "&cmd=deleteDir&dir=" . $name; ?>" onclick="return confirm('Das Verzeichnis \' <?php echo $name; ?> \' wirklich l&ouml;schen ?');"><img src="<?php echo $this->iconUrlRemove; ?>"></a></td>
                                 <?php else: ?>
                                     <td>&nbsp;</td>
                                 <?php endif; ?>
