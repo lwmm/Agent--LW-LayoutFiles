@@ -1,0 +1,25 @@
+<div class="lwBoxLeftnavi" style="font-size: 12px;" onClick="changeUrl('admin.php?obj=admin');">zur&uuml;ck</div>
+
+<div class="lwBoxLeftContent" style="font-size: 12px;">
+    <div 
+        class="cNavEntry" 
+        onclick="changeUrl('?obj=layoutfiles&dir=<?php echo "base"; ?>');"
+        <?php if ("base" == $this->selectedDir || empty($this->selectedDir)): ?>
+            style="background-color: #0072BB;"
+        <?php endif; ?>
+        ><span style="padding-left: 25px;color: #fff;font-weight: bold; font-size: 12px;background: url('<?php echo $this->folderIconOpen ?>') 0 0 no-repeat;">Hauptverzeichnis LayoutFiles</span></div>
+    
+        <?php if (!empty($this->dirs)) : ?>
+            <?php foreach ($this->dirs as $dir) : ?>
+            <div 
+                class="cNavEntry" 
+                onclick="changeUrl('?obj=layoutfiles&dir=<?php echo urlencode($dir["name"]); ?>');"
+                <?php if ($dir["name"] == $this->selectedDir): ?>
+                    style="background-color: #0072BB!important; padding-left: 55px; background: url('<?php echo $this->folderIconOpen ?>') 30px 5px no-repeat;"
+                <?php else: ?>
+                    style="padding-left: 55px; background: url('<?php echo $this->folderIcon ?>') 30px 5px no-repeat;"
+                <?php endif; ?>
+                ><?php echo $dir["name"]; ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+</div>
