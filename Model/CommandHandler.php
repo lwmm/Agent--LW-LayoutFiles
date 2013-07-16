@@ -21,6 +21,10 @@ class CommandHandler
         if (!is_dir($this->config["path"]["resource"] . "layoutfiles/")) {
             $resource = \lw_directory::getInstance($this->config["path"]["resource"]);
             $resource->add("layoutfiles");
+
+            $htaccess = fopen($this->config["path"]["resource"] . "layoutfiles/.htaccess", "w");
+            fwrite($htaccess, '<FilesMatch "\.(php|PHP|php5|PHP5|pl|PL|phtml)$">'.PHP_EOL.'Order Allow,Deny'.PHP_EOL.'Deny from all'.PHP_EOL.'</FilesMatch>');
+            fclose($htaccess);
         }
     }
 
@@ -68,7 +72,7 @@ class CommandHandler
                 $image->resize();
                 $image->saveImage();
             }
-        }        
+        }
     }
 
     public function deleteFiles($fileArray, $dir)
