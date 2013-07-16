@@ -13,7 +13,7 @@ class CommandHandler
     {
         $this->config = $config;
         $this->pictureExtensions = array("jpg", "jpeg", "gif", "png", "bmp");
-        $this->allowedExtensions = array("css", "js", "htm", "html", "flv");
+        $this->allowedExtensions = array("css", "js", "htm", "html", "flv", "phtml");
     }
 
     public function createLayoutFilesDirectoryIfNotExists()
