@@ -30,11 +30,15 @@ class CommandHandler
 
     public function addDir($dir)
     {
+        if(is_dir($this->config["path"]["resource"] . "layoutfiles/" . $dir . "/")){
+            return false;
+        }
         $dir = preg_replace("/[^A-Za-z0-9_-]/", "", $dir);
         if (!is_dir($this->config["path"]["resource"] . "layoutfiles/" . $dir)) {
             $layoutFilesDir = \lw_directory::getInstance($this->config["path"]["resource"] . "layoutfiles/");
             $layoutFilesDir->add($dir);
         }
+        return true;
     }
 
     public function deleteDir($dir)
@@ -108,8 +112,13 @@ class CommandHandler
 
     public function renameDir($from, $to)
     {
+        if(is_dir($this->config["path"]["resource"] . "layoutfiles/" . $to . "/")){
+            return false;
+        }
         $layoutFilesDir = \lw_directory::getInstance($this->config["path"]["resource"] . "layoutfiles/" . $from . "/");
         $layoutFilesDir->rename($to);
+        
+        return true;
     }
 
 }

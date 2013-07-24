@@ -11,7 +11,7 @@ class Main
         $this->config = $config;
     }
 
-    public function render($dir, $dirContent)
+    public function render($dir, $dirContent, $error)
     {
         #print_r($dirContent);die();
         $baseUrl = substr(\AgentLayoutFiles\Services\Page::getUrl(), 0, strpos(\AgentLayoutFiles\Services\Page::getUrl(), "index.php"))."admin.php?obj=layoutfiles";
@@ -31,6 +31,8 @@ class Main
         $view->dirContent = $dirContent;
         $view->baseUrl = $baseUrl;
         
+        $view->error = $error;
+
         return $view->render();
     }
 

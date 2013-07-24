@@ -159,6 +159,15 @@
 
 <script>
     $(document).ready(function() {
+        <?php if($this->error): ?>
+                <?php if(array_key_exists("renameDir", $this->error)): ?>
+                    alert("Das Verzeichnis [ <?php echo $this->error["renameDir"]["from"]; ?> ] kann nicht umbenannt werden.\nEin Verzeichnis [ <?php echo $this->error["renameDir"]["to"]; ?> ] existiert bereits.");
+                <?php endif; ?>   
+                <?php if(array_key_exists("newDir", $this->error)): ?>
+                    alert("Das Verzeichnis [ <?php echo $this->error["newDir"]["dirname"]; ?> ] kann nicht angelegt werden, da bereits ein Verzeichnis mit diesem Namen existiert.");
+                <?php endif; ?>   
+        <?php endif; ?>
+    
         $('th input:checkbox').click(function(e) {
             var table = $(e.target).parents('table:first');
             $('td input:checkbox', table).attr('checked', e.target.checked);
@@ -182,13 +191,7 @@
                     });
                 <?php endif; ?>
             <?php $i++; endforeach; ?>
-        <?php endif; ?>
-    
-        <?php if($this->error): ?>
-            <?php if(array_key_exists("ext", $this->error)): ?>
-                alert("Sie haben versucht eine Datei vom Datentyp '<?php echo $this->error["ext"] ?>' hochzuladen. Dieser Datentyp ist nicht erlaubt.");
-        <?php endif;endif; ?>
-    
+        <?php endif; ?>    
     });
 </script>
 
@@ -216,7 +219,7 @@
                                   data: {'filename' : fileName, 'dir' : '<?php echo $this->dir; ?>'},
                                   success: function(data){
                                                 if(data === 'NotAllowedExtension'){
-                                                    alert('Sie haben versucht eine Datei hochzuladen, deren Datentyp nicht erlaubt ist.\nErlaubte Dateiendungen : jpg, jpeg, gif, png, bmp, css, js, htm, html, flv');
+                                                    alert('Sie haben versucht eine Datei hochzuladen, deren Datentyp nicht erlaubt ist.\nErlaubte Dateiendungen : jpg, jpeg, gif, png, bmp, css, js, htm, html, phtml, flv');
                                                 }   
                                                 else if(data === 'FilenameExisting'){
                                                     if(confirm('Es ist bereits eine Datei mit dem Namen : \''+fileName+'\' vorhanden. Soll diese &uuml;berschrieben werden ? ')) {$('form#uploadFileForm').submit();};

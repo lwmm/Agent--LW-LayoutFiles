@@ -28,7 +28,11 @@ class LayoutFilesController
         $error = false;
         $dir = "base";
         if ($this->request->getRaw("dir")) {
-            $dir = $this->request->getRaw("dir");
+            if($queryHandler->isDirExisting($this->request->getRaw("dir"))){
+                $dir = $this->request->getRaw("dir");
+            }else{
+                $dir = "base";
+            }
         }
 
         
@@ -44,7 +48,9 @@ class LayoutFilesController
 
             switch ($this->request->getAlnum("cmd")) {
                 case "addDir":
-                    $commandHandler->addDir($this->request->getAlnum("newDir"));
+                    if(!$commandHandler->addDir($this->request->getAlnum("newDir"))){
+                        $error = "&error=newdir&dirname=".$this->request->getAlnum("newDir");
+                    }
                     break;
                 case "addFile":
                     $commandHandler->addFile($this->request->getFileData("newFile"), $this->request->getAlnum("dir"));
@@ -62,15 +68,23 @@ class LayoutFilesController
                     \AgentLayoutFiles\Services\Page::reload($baseUrl . "&dir=" . $this->request->getAlnum("dir"));
                     break;
                 case "renameDir":
-                    $commandHandler->renameDir($this->request->getRaw("from"), $this->request->getRaw("to"));
+                    if(!$commandHandler->renameDir($this->request->getRaw("from"), $this->request->getRaw("to"))){                        
+                        $error = "&error=renamedir&from=".$this->request->getRaw("from")."&to=".$this->request->getRaw("to");
+                    }
                     break;
             }
-            \AgentLayoutFiles\Services\Page::reload($baseUrl);
+            \AgentLayoutFiles\Services\Page::reload($baseUrl.$error);
         }
 
         if ($this->request->getAlnum("error")) {
-            if ($this->request->getAlnum("error") == "ext") {
-                $error = array("ext" => $this->request->getAlnum("ext"));
+            
+            switch ($this->request->getAlnum("error")) {
+                case "renamedir":
+                    $error["renameDir"] = array("from" => $this->request->getRaw("from"),"to" => $this->request->getRaw("to"));
+                    break;
+                case "newdir":
+                    $error["newDir"] = array("dirname" => $this->request->getAlnum("dirname"));
+                    break;
             }
         }
 

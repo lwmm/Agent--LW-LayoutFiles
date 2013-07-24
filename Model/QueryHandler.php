@@ -112,4 +112,8 @@ class QueryHandler
         return false;
     }
 
+    public function isDirExisting($dir)
+    {
+        return is_dir($this->config["path"]["resource"] . "layoutfiles/" . $dir . "/");
+    }
 }
