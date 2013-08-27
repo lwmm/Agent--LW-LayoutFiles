@@ -219,7 +219,7 @@
                                   data: {'filename' : fileName, 'dir' : '<?php echo $this->dir; ?>'},
                                   success: function(data){
                                                 if(data === 'NotAllowedExtension'){
-                                                    alert('Sie haben versucht eine Datei hochzuladen, deren Datentyp nicht erlaubt ist.\nErlaubte Dateiendungen : jpg, jpeg, gif, png, bmp, css, js, htm, html, phtml, flv');
+                                                    alert('Sie haben versucht eine Datei hochzuladen, deren Datentyp nicht erlaubt ist.\nErlaubte Dateiendungen : jpg, jpeg, gif, png, bmp, css, js, htm, html, flv, eot, svg, ttf, woff');
                                                 }   
                                                 else if(data === 'FilenameExisting'){
                                                     if(confirm('Es ist bereits eine Datei mit dem Namen : \''+fileName+'\' vorhanden. Soll diese &uuml;berschrieben werden ? ')) {$('form#uploadFileForm').submit();};
