@@ -12,8 +12,8 @@ class CommandHandler
     public function __construct($config)
     {
         $this->config = $config;
-        $this->pictureExtensions = array("jpg", "jpeg", "gif", "png", "bmp");
-        $this->allowedExtensions = array("css", "js", "htm", "html", "flv", "eot", "svg", "ttf", "woff");
+        $this->pictureExtensions = array("jpg", "jpeg", "gif", "png", "bmp", "ico");
+        $this->allowedExtensions = array("css", "js", "htm", "html", "flv", "eot", "svg", "ttf", "woff", "phtml");
     }
 
     public function createLayoutFilesDirectoryIfNotExists()
